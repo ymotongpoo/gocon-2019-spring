@@ -1,0 +1,11 @@
+% go test -bench . -benchtime=10s -benchmem                                                         (git:master)
+goos: linux
+goarch: amd64
+BenchmarkFindAllLines1-4             200          77033864 ns/op        78130601 B/op     893016 allocs/op
+BenchmarkFindAllLines2-4             100         107122210 ns/op        78964963 B/op     893191 allocs/op
+BenchmarkFindAllLines3-4             100         105690887 ns/op        124878581 B/op   1311597 allocs/op
+BenchmarkFindLines1-4                100         110059986 ns/op        75089555 B/op     892608 allocs/op
+BenchmarkFindLines2-4                100         106095957 ns/op        75201795 B/op     892706 allocs/op
+BenchmarkFindLines3-4                100         172010236 ns/op        119691878 B/op   1310990 allocs/op
+PASS
+ok      _/home/ymotongpoo/src/projects/gocon-2019-spring/02-bench       83.027s
