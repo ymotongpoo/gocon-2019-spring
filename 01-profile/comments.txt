@@ -1,0 +1,58 @@
+*** 00-original/main.go	2019-05-15 21:53:17.490804332 +0900
+--- 01-profile/main.go	2019-05-15 22:07:49.150794693 +0900
+***************
+*** 19,30 ****
+--- 19,49 ----
+  	"fmt"
+  	"log"
+  	"net/http"
++ 	_ "net/http/pprof" // (1) Easiest way to add pprof handlers
+  	"os"
+  	"regexp"
++ 	"runtime"
+  	"sync"
+  )
+  
++ // Blank import of net/http/pprof automatically provides
++ // the endpoints for `go tool pprof`:
++ // - http://localhost:8080/debug/pprof/profile?seconds=30
++ // - http://localhost:8080/debug/pprof/heap
++ // - http://localhost:8080/debug/pprof/threadcreate
++ // - http://localhost:8080/debug/pprof/block
++ // - http://localhost:8080/debug/pprof/mutex
++ // - http://localhost:8080/debug/pprof/trace?seconds=5
+  func main() {
++ 	// runtime.SetBlockProfileRate is required to get blocking profile.
++ 	// c.f. https://golang.org/pkg/runtime/#SetBlockProfileRate
++ 	runtime.SetBlockProfileRate(1)
++ 
++ 	// runtime.SetCPUProfileRate is set to 100 by default.
++ 	// It should not be above 500Hz accorrding to the source code comment.
++ 	// c.f. https://go.googlesource.com/go/+/go1.11.4/src/runtime/pprof/pprof.go#743
++ 	runtime.SetCPUProfileRate(250)
++ 
+  	http.HandleFunc("/grep/", fineAllLinesHandler)
+  	http.ListenAndServe("0.0.0.0:8080", nil)
+  }
+
+
+
+----
+
+Steps to take profile data
+
+1. run 01-profile
+
+  $ go build && ./01-profile
+
+2. run benchmark tool
+
+  $ hey -c 4 -n 1000 http://localhost:8080/grep/?q=タイ
+
+3. run `go tool pprof`
+
+  $ go tool pprof -http=:8888 http://localhost:8080/debug/pprof/profile
+
+  or to access pprof Web UI
+
+  $ go tool pprof -http=0.0.0.0:8888 http://localhost:8080/debug/pprof/profile
