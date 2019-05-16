@@ -1,4 +1,4 @@
-% go test -bench . -benchtime=10s -benchmem                                                         (git:master)
+% go test -bench . -benchtime=10s -benchmem
 goos: linux
 goarch: amd64
 BenchmarkFindAllLines1-4             200          77033864 ns/op        78130601 B/op     893016 allocs/op
@@ -9,3 +9,28 @@ BenchmarkFindLines2-4                100         106095957 ns/op        75201795
 BenchmarkFindLines3-4                100         172010236 ns/op        119691878 B/op   1310990 allocs/op
 PASS
 ok      _/home/ymotongpoo/src/projects/gocon-2019-spring/02-bench       83.027s
+
+
+% go test -bench . -cpu=1,2,4 -benchtime=5s -benchmem
+goos: linux
+goarch: amd64
+BenchmarkFindAllLines1               100         102537225 ns/op        74750204 B/op     892687 allocs/op
+BenchmarkFindAllLines1-2             100          63955683 ns/op        75721862 B/op     892779 allocs/op
+BenchmarkFindAllLines1-4             100          55062284 ns/op        78266721 B/op     893025 allocs/op
+BenchmarkFindAllLines2               100         105555812 ns/op        75005099 B/op     892805 allocs/op
+BenchmarkFindAllLines2-2             100          69550435 ns/op        76235567 B/op     892921 allocs/op
+BenchmarkFindAllLines2-4             100          56198628 ns/op        79635942 B/op     893249 allocs/op
+BenchmarkFindAllLines3               100         163613195 ns/op        119191434 B/op   1311056 allocs/op
+BenchmarkFindAllLines3-2              50         107166363 ns/op        120691846 B/op   1311193 allocs/op
+BenchmarkFindAllLines3-4             100          89497773 ns/op        124984745 B/op   1311607 allocs/op
+BenchmarkFindLines1                  100         103685206 ns/op        74754139 B/op     892581 allocs/op
+BenchmarkFindLines1-2                100         102451648 ns/op        75068300 B/op     892606 allocs/op
+BenchmarkFindLines1-4                100         102489178 ns/op        74950964 B/op     892597 allocs/op
+BenchmarkFindLines2                  100         101051740 ns/op        74842834 B/op     892676 allocs/op
+BenchmarkFindLines2-2                100          99995225 ns/op        75118144 B/op     892699 allocs/op
+BenchmarkFindLines2-4                100          99419142 ns/op        75038369 B/op     892693 allocs/op
+BenchmarkFindLines3                   50         163143927 ns/op        119180504 B/op   1310947 allocs/op
+BenchmarkFindLines3-2                 50         162126303 ns/op        119558826 B/op   1310978 allocs/op
+BenchmarkFindLines3-4                 50         161633943 ns/op        119486488 B/op   1310973 allocs/op
+PASS
+ok      _/home/ymotongpoo/src/projects/gocon-2019-spring/02-bench       163.008s
