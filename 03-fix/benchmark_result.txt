@@ -1,0 +1,37 @@
+% go test -bench=. -benchtime=10s
+goos: linux
+goarch: amd64
+pkg: github.com/ymotongpoo/gocon-2019-spring/03-fix
+BenchmarkFindAllLines1-4            1000          17040383 ns/op
+BenchmarkFindAllLines2-4            1000          19080018 ns/op
+BenchmarkFindAllLines3-4            1000          20575484 ns/op
+BenchmarkFindLines1-4                500          33206566 ns/op
+BenchmarkFindLines2-4                500          29599564 ns/op
+BenchmarkFindLines3-4                500          31268093 ns/op
+PASS
+ok      github.com/ymotongpoo/gocon-2019-spring/03-fix  118.961s
+
+% go test -bench . -cpu=1,2,4 -benchtime=5s -benchmem
+goos: linux
+goarch: amd64
+pkg: github.com/ymotongpoo/gocon-2019-spring/03-fix
+BenchmarkFindAllLines1               200          31399529 ns/op        22130563 B/op      55920 allocs/op
+BenchmarkFindAllLines1-2             300          25950560 ns/op        22492832 B/op      55959 allocs/op
+BenchmarkFindAllLines1-4             300          19630267 ns/op        23071223 B/op      56019 allocs/op
+BenchmarkFindAllLines2               200          35273215 ns/op        22260147 B/op      56021 allocs/op
+BenchmarkFindAllLines2-2             300          24440495 ns/op        22721582 B/op      56070 allocs/op
+BenchmarkFindAllLines2-4             300          21608037 ns/op        23263300 B/op      56127 allocs/op
+BenchmarkFindAllLines3               200          33519122 ns/op        22129340 B/op      55879 allocs/op
+BenchmarkFindAllLines3-2             300          20281058 ns/op        22502009 B/op      55919 allocs/op
+BenchmarkFindAllLines3-4             500          17767397 ns/op        23092477 B/op      55981 allocs/op
+BenchmarkFindLines1                  200          37246374 ns/op        22057420 B/op      55790 allocs/op
+BenchmarkFindLines1-2                200          31678496 ns/op        22170713 B/op      55803 allocs/op
+BenchmarkFindLines1-4                200          34685763 ns/op        22201723 B/op      55805 allocs/op
+BenchmarkFindLines2                  200          36894981 ns/op        22158759 B/op      55887 allocs/op
+BenchmarkFindLines2-2                200          30492598 ns/op        22249549 B/op      55897 allocs/op
+BenchmarkFindLines2-4                300          27952266 ns/op        22280996 B/op      55900 allocs/op
+BenchmarkFindLines3                  200          37299817 ns/op        22062536 B/op      55743 allocs/op
+BenchmarkFindLines3-2                200          33643763 ns/op        22163008 B/op      55754 allocs/op
+BenchmarkFindLines3-4                200          38976150 ns/op        22205504 B/op      55758 allocs/op
+PASS
+ok      github.com/ymotongpoo/gocon-2019-spring/03-fix  180.228s
