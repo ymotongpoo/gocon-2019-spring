@@ -1,0 +1,17 @@
+Steps to take trace data
+
+1. run 04-trace
+
+  $ go build && ./04-trace
+
+2. run benchmark tool
+
+  $ hey -c 4 -n 1000 http://localhost:8080/grep/?q=タイ
+
+3. run `curl` to trace endpoint
+
+  $ curl http://localhost:8080/debug/pprof/trace?seconds=5 > trace.out
+
+4. run `go tool trace` for the output file.
+
+  $ go tool trace trace.out
